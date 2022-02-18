@@ -60,6 +60,7 @@ func NewMinIOKV(ctx context.Context, option *Option) (*MinIOKV, error) {
 	})
 	// options nil or invalid formatted endpoint, don't need to retry
 	if err != nil {
+		log.Debug("MinioKV NewMinioKV", zap.Any("Create client", err.Error()))
 		return nil, err
 	}
 	var bucketExists bool
@@ -67,6 +68,7 @@ func NewMinIOKV(ctx context.Context, option *Option) (*MinIOKV, error) {
 	checkBucketFn := func() error {
 		bucketExists, err = minIOClient.BucketExists(ctx, option.BucketName)
 		if err != nil {
+			log.Debug("MinioKV NewMinioKV", zap.Any("Bucket Exists", err.Error()))
 			return err
 		}
 		if !bucketExists {

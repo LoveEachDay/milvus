@@ -91,6 +91,7 @@ func newMinioChunkManagerWithConfig(ctx context.Context, c *config) (*MinioChunk
 		Secure: c.useSSL,
 	}
 	minIOClient, err := newMinioFn(c.address, minioOpts)
+	log.Info("minio address", zap.String("address", c.address))
 	// options nil or invalid formatted endpoint, don't need to retry
 	if err != nil {
 		return nil, err

@@ -342,7 +342,7 @@ func (p *PulsarConfig) initAddress() {
 
 	port := p.Base.LoadWithDefault("pulsar.port", "")
 	if len(pulsarHost) != 0 && len(port) != 0 {
-		p.Address = "pulsar://" + pulsarHost + ":" + port
+		p.Address = "pulsar+ssl://" + pulsarHost + ":" + port
 	}
 }
 
